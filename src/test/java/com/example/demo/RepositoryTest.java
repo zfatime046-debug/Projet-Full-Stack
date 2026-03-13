@@ -2,15 +2,16 @@ package com.example.demo;
 
 import com.example.demo.entities.*;
 import com.example.demo.repositories.*;
-import org.junit.jupiter.api.Test;
+import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
+import org.testng.annotations.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import java.time.LocalDate;
 
 @SpringBootTest
-public class RepositoryTest {
+public class RepositoryTest extends AbstractTestNGSpringContextTests {
 
-    @Autowired ProjetRepository projetRepository;
+    ProjetRepository projetRepository;
     @Autowired EmployeRepository employeRepository;
     @Autowired PhaseRepository phaseRepository;
     @Autowired OrganismeRepository organismeRepository;
