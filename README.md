@@ -19,6 +19,12 @@ Execution des 5 Test:
 
 La cause :un organisme lié à des projets ne peut pas être supprimé tant que ses projets existent
 ----
+---
+#Employe
+---
+Creer un Employe:
+<img width="1437" height="848" alt="image" src="https://github.com/user-attachments/assets/5bad6fdd-eebe-4b06-b746-ae8b2151b3af" />
+
 
 
 
