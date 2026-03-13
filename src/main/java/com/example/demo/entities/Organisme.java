@@ -3,6 +3,8 @@ package com.example.demo.entities;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.List;
+
 @Entity
 @Data
 @Table(name = "organismes")
@@ -19,4 +21,7 @@ public class Organisme {
     private String nomContact;
     private String emailContact;
     private String siteWeb;
+
+    @OneToMany(mappedBy = "organisme", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Projet> projets;
 }
