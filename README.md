@@ -33,6 +33,10 @@ La cause :un organisme lié à des projets ne peut pas être supprimé tant que 
 #Modifier un Employe:
 <img width="1429" height="868" alt="image" src="https://github.com/user-attachments/assets/d9acbe80-cc41-45ba-8d90-bcfceff17266" />
 
+#La disponibinlite:
+
+
+
 
 
 
