@@ -10,6 +10,8 @@
 <img width="1469" height="942" alt="image" src="https://github.com/user-attachments/assets/7b2dc557-d28d-4262-900b-209b29a80013" />
 #Supprimer un Organisme:
 <img width="1443" height="777" alt="image" src="https://github.com/user-attachments/assets/37456b79-da25-4491-bc62-93bfc4e9bab2" />
+<img width="1814" height="724" alt="image" src="https://github.com/user-attachments/assets/e75776d6-4317-4677-9f93-f89582c9c3ef" />
+
 La cause :un organisme lié à des projets ne peut pas être supprimé tant que ses projets existent
 ----
 
