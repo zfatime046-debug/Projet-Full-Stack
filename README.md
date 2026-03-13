@@ -22,8 +22,21 @@ La cause :un organisme lié à des projets ne peut pas être supprimé tant que 
 ---
 #Employe
 ---
-Creer un Employe:
+#Creer un Employe:
 <img width="1437" height="848" alt="image" src="https://github.com/user-attachments/assets/5bad6fdd-eebe-4b06-b746-ae8b2151b3af" />
+#Recuperer un Employe:
+<img width="1430" height="809" alt="image" src="https://github.com/user-attachments/assets/90880317-e570-411f-9a33-f0e927efb5c9" />
+#Lister Tous les Employe:
+<img width="1455" height="883" alt="image" src="https://github.com/user-attachments/assets/b0b42205-847b-4bd3-9203-4b55127360b9" />
+#Supprimer un Employe:
+<img width="1429" height="652" alt="image" src="https://github.com/user-attachments/assets/8f3414b7-89b8-499a-9fa3-c2bbf58aba47" />
+#Modifier un Employe:
+<img width="1429" height="868" alt="image" src="https://github.com/user-attachments/assets/d9acbe80-cc41-45ba-8d90-bcfceff17266" />
+
+
+
+
+
 
 
 
