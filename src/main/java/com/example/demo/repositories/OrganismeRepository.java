@@ -7,4 +7,5 @@ import java.util.List;
 public interface OrganismeRepository extends JpaRepository<Organisme, Long> {
     List<Organisme> findByNomContaining(String nom);
     Organisme findByCode(String code);
+    List<Organisme> findByNomContactContaining(String nomContact);
 }
