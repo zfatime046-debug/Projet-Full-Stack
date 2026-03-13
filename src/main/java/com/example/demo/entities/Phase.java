@@ -7,6 +7,8 @@ import lombok.Data;
 import java.time.LocalDate;
 import java.util.List;
 
+
+
 @Entity
 @Data
 @Table(name = "phases")
@@ -22,9 +24,9 @@ public class Phase {
     private LocalDate dateDebut;
     private LocalDate dateFin;
     private double montant;
-    private boolean etatRealisation;
-    private boolean etatFacturation;
-    private boolean etatPaiement;
+    private String etatRealisation;
+    private String etatFacturation;
+    private String etatPaiement;
 
     @ManyToOne
     @JoinColumn(name = "projet_id")

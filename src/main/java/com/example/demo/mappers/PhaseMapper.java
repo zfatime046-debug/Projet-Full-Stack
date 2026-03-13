@@ -15,9 +15,9 @@ public class PhaseMapper {
         phase.setDateDebut(dto.getDateDebut());
         phase.setDateFin(dto.getDateFin());
         phase.setMontant(dto.getMontant());
-        phase.setEtatRealisation(dto.isEtatRealisation());
-        phase.setEtatFacturation(dto.isEtatFacturation());
-        phase.setEtatPaiement(dto.isEtatPaiement());
+        phase.setEtatRealisation(String.valueOf(dto.isEtatRealisation()));
+        phase.setEtatFacturation(String.valueOf(dto.isEtatFacturation()));
+        phase.setEtatPaiement(String.valueOf(dto.isEtatPaiement()));
 
         return phase;
     }
