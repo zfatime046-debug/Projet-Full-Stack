@@ -2,6 +2,8 @@ package com.example.demo;
 
 import com.example.demo.entities.*;
 import com.example.demo.repositories.*;
+import jakarta.transaction.Transactional;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.annotations.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,15 +11,16 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.time.LocalDate;
 
 @SpringBootTest
+@Transactional   // ← Ajouter
+@Rollback
 public class RepositoryTest extends AbstractTestNGSpringContextTests {
 
-    ProjetRepository projetRepository;
     @Autowired EmployeRepository employeRepository;
     @Autowired PhaseRepository phaseRepository;
     @Autowired OrganismeRepository organismeRepository;
     @Autowired ProfilRepository profilRepository;
     @Autowired AffectationRepository affectationRepository;
-
+    @Autowired ProjetRepository projetRepository;
     // Recherche projet par code
     @Test
     void testFindProjetByCode() {
@@ -39,7 +42,7 @@ public class RepositoryTest extends AbstractTestNGSpringContextTests {
         Projet trouve = projetRepository.findByCode("PRJ001").orElse(null);
         assert trouve != null;
         assert trouve.getNom().equals("Projet Test");
-        System.out.println("✅ Test 1 OK — Projet trouvé : " + trouve.getNom());
+        System.out.println("Test 1 OK — Projet trouvé : " + trouve.getNom());
     }
 
     // Recherche employé par matricule
@@ -62,7 +65,7 @@ public class RepositoryTest extends AbstractTestNGSpringContextTests {
         Employe trouve = employeRepository.findByMatricule("EMP001").orElse(null);
         assert trouve != null;
         assert trouve.getNom().equals("Alami");
-        System.out.println("✅ Test 2 OK — Employé trouvé : " + trouve.getNom());
+        System.out.println("Test 2 OK — Employé trouvé : " + trouve.getNom());
     }
 
     //Recherche phases d'un projet
@@ -91,7 +94,7 @@ public class RepositoryTest extends AbstractTestNGSpringContextTests {
 
         var phases = phaseRepository.findByProjetId(projet.getId());
         assert !phases.isEmpty();
-        System.out.println("✅ Test 3 OK — Nombre de phases : " + phases.size());
+        System.out.println("Test 3 OK — Nombre de phases : " + phases.size());
     }
 
     //Phases terminées non facturées
@@ -123,7 +126,7 @@ public class RepositoryTest extends AbstractTestNGSpringContextTests {
         var phases = phaseRepository
                 .findByEtatRealisationTrueAndEtatFacturationFalse();
         assert !phases.isEmpty();
-        System.out.println("✅ Test 4 OK — Phases terminées non facturées : "
+        System.out.println("Test 4 OK — Phases terminées non facturées : "
                 + phases.size());
     }
 
@@ -157,7 +160,7 @@ public class RepositoryTest extends AbstractTestNGSpringContextTests {
         var phases = phaseRepository
                 .findByEtatFacturationTrueAndEtatPaiementFalse();
         assert !phases.isEmpty();
-        System.out.println("✅ Test 5 OK — Phases facturées non payées : "
+        System.out.println("Test 5 OK — Phases facturées non payées : "
                 + phases.size());
     }
 }

@@ -2,11 +2,14 @@ package com.example.demo.controllers;
 
 import com.example.demo.dto.EmployeRequestDTO;
 import com.example.demo.dto.EmployeResponseDTO;
+import com.example.demo.entities.Employe;
 import com.example.demo.services.EmployeService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -41,5 +44,13 @@ public class EmployeController {
     public ResponseEntity<Void> supprimer(@PathVariable Long id) {
         employeService.supprimer(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/disponibles")
+    public ResponseEntity<List<Employe>> getEmployesDisponibles(
+            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dateDebut,
+            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dateFin) {
+        List<Employe> employes = employeService.getEmployesDisponibles(dateDebut, dateFin);
+        return ResponseEntity.ok(employes);
     }
 }
