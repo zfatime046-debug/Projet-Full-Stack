@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class DocumentMapper {
 
-    // Convertir un DTO en entité
+    
     public Document toEntity(DocumentDTO dto) {
         Document document = new Document();
         document.setId(dto.getId());
@@ -19,7 +19,7 @@ public class DocumentMapper {
         return document;
     }
 
-    // Convertir une entité en DTO
+    
     public DocumentDTO toDTO(Document document) {
         DocumentDTO dto = new DocumentDTO();
         dto.setId(document.getId());
