@@ -8,6 +8,7 @@ import com.example.demo.repositories.EmployeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -65,5 +66,9 @@ public class EmployeService {
 
     public void supprimer(Long id) {
         employeRepository.deleteById(id);
+    }
+
+    public List<Employe> getEmployesDisponibles(LocalDate dateDebut, LocalDate dateFin) {
+        return employeRepository.findEmployesDisponibles(dateDebut, dateFin);
     }
 }
