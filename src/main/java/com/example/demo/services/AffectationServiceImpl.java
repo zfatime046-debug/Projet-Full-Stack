@@ -13,6 +13,7 @@ import com.example.demo.repositories.EmployeRepository;
 import com.example.demo.repositories.PhaseRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -109,6 +110,19 @@ public class AffectationServiceImpl implements AffectationService {
     @Override
     public List<Affectation> getAffectationsByEmploye(Long employeId) {
         return affectationRepository.findByEmploye_Id(employeId);
+    }
+
+    @Override
+    public List<Phase> getPhasesByEmploye(Long employeId) {
+        List<Affectation> affectations = affectationRepository.findByEmploye_Id(employeId);
+
+        List<Phase> phases = new ArrayList<>();
+
+        for (Affectation affectation : affectations) {
+            phases.add(affectation.getPhase());
+        }
+
+        return phases;
     }
 
     @Override

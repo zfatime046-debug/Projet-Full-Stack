@@ -2,6 +2,7 @@ package com.example.demo.controllers;
 
 import com.example.demo.dto.AffectationRequest;
 import com.example.demo.entities.Affectation;
+import com.example.demo.entities.Phase;
 import com.example.demo.services.AffectationService;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,7 +33,10 @@ public class AffectationController {
     public List<Affectation> getAllAffectations() {
         return affectationService.getAllAffectations();
     }
-
+    @GetMapping("/employe/{employeId}/phases")
+    public List<Phase> getPhasesByEmploye(@PathVariable Long employeId) {
+        return affectationService.getPhasesByEmploye(employeId);
+    }
     @GetMapping("/{employeId}/{phaseId}")
     public Affectation getAffectation(@PathVariable Long employeId, @PathVariable Long phaseId) {
         return affectationService.getAffectation(employeId, phaseId);

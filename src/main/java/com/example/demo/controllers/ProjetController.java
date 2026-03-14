@@ -1,6 +1,7 @@
 package com.example.demo.controllers;
 
 import com.example.demo.dto.ProjetRequest;
+import com.example.demo.entities.Phase;
 import com.example.demo.entities.Projet;
 import com.example.demo.services.ProjetService;
 import org.springframework.web.bind.annotation.*;
@@ -32,7 +33,27 @@ public class ProjetController {
     public Projet getProjetById(@PathVariable Long id) {
         return projetService.getProjetById(id);
     }
+    @GetMapping("/{id}/resume")
+    public String getResumeProjet(@PathVariable Long id) {
 
+        Projet projet = projetService.getProjetById(id);
+
+        int nombrePhases = 0;
+        double totalPhases = 0;
+
+        if (projet.getPhases() != null) {
+            nombrePhases = projet.getPhases().size();
+
+            for (Phase p : projet.getPhases()) {
+                totalPhases += p.getMontant();
+            }
+        }
+
+        return "Projet : " + projet.getNom() +
+                " | Montant projet : " + projet.getMontant() +
+                " | Nombre de phases : " + nombrePhases +
+                " | Montant total des phases : " + totalPhases;
+    }
     @GetMapping
     public List<Projet> getAllProjets() {
         return projetService.getAllProjets();

@@ -8,6 +8,9 @@ import java.util.List;
 public interface PhaseService {
 
     Phase createPhase(PhaseRequest request);
+    Phase updateEtatRealisation(Long id, Boolean etat);
+    Phase updateEtatFacturation(Long id, Boolean etat);
+    Phase updateEtatPaiement(Long id, Boolean etat);
 
     Phase updatePhase(Long id, PhaseRequest request);
 
