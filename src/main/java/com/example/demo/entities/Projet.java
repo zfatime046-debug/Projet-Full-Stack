@@ -3,6 +3,7 @@ package com.example.demo.entities;
 import jakarta.persistence.*;
 import lombok.Data;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -33,8 +34,7 @@ public class Projet {
 
     @OneToMany(mappedBy = "projet", cascade = CascadeType.ALL)
     @JsonManagedReference
-    private List<Phase> phases;
+    private List<Phase> phases = new ArrayList<>();
 
     @OneToMany(mappedBy = "projet", cascade = CascadeType.ALL)
-    private List<Document> documents;
-}
+    private List<Document> documents = new ArrayList<>();}

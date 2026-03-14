@@ -63,9 +63,9 @@ public class PhaseServiceImpl implements PhaseService {
         phase.setDateDebut(request.getDateDebut());
         phase.setDateFin(request.getDateFin());
         phase.setMontant(request.getMontant());
-        phase.setEtatRealisation(String.valueOf(request.isEtatRealisation()));
-        phase.setEtatFacturation(String.valueOf(request.isEtatFacturation()));
-        phase.setEtatPaiement(String.valueOf(request.isEtatPaiement()));
+        phase.setEtatRealisation(request.isEtatRealisation() ? "en cours" : "non realise");
+        phase.setEtatFacturation(request.isEtatFacturation() ? "facture" : "non facture");
+        phase.setEtatPaiement(request.isEtatPaiement() ? "paye" : "non paye");
         phase.setProjet(projet);
 
         return phaseRepository.save(phase);
