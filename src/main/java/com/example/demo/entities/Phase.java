@@ -1,9 +1,13 @@
 package com.example.demo.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 import java.time.LocalDate;
 import java.util.List;
+
+
 
 @Entity
 @Data
@@ -20,12 +24,13 @@ public class Phase {
     private LocalDate dateDebut;
     private LocalDate dateFin;
     private double montant;
-    private boolean etatRealisation;
-    private boolean etatFacturation;
-    private boolean etatPaiement;
+    private String etatRealisation;
+    private String etatFacturation;
+    private String etatPaiement;
 
     @ManyToOne
     @JoinColumn(name = "projet_id")
+    @JsonBackReference
     private Projet projet;
 
     @OneToMany(mappedBy = "phase", cascade = CascadeType.ALL)
@@ -35,5 +40,6 @@ public class Phase {
     private Facture facture;
 
     @OneToMany(mappedBy = "phase", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<Affectation> affectations;
 }
