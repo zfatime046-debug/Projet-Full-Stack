@@ -20,7 +20,7 @@ public class DocumentController {
 
     private final DocumentService documentService;
 
-    // POST /api/projets/{projetId}/documents
+    
     @PostMapping("/api/projets/{projetId}/documents")
     public ResponseEntity<DocumentDTO> createDocument(
             @PathVariable Long projetId,
@@ -31,7 +31,7 @@ public class DocumentController {
         );
     }
 
-    // GET /api/projets/{projetId}/documents
+    
     @GetMapping("/api/projets/{projetId}/documents")
     public ResponseEntity<List<DocumentDTO>> getDocumentsByProjet(
             @PathVariable Long projetId) {
@@ -39,13 +39,13 @@ public class DocumentController {
                 documentService.getDocumentsByProjet(projetId));
     }
 
-    // GET /api/documents/{id}
+    
     @GetMapping("/api/documents/{id}")
     public ResponseEntity<DocumentDTO> getDocumentById(@PathVariable Long id) {
         return ResponseEntity.ok(documentService.getDocumentById(id));
     }
 
-    // PUT /api/documents/{id}
+    
     @PutMapping("/api/documents/{id}")
     public ResponseEntity<DocumentDTO> updateDocument(
             @PathVariable Long id,
@@ -56,7 +56,7 @@ public class DocumentController {
         );
     }
 
-    // DELETE /api/documents/{id}
+    
     @DeleteMapping("/api/documents/{id}")
     public ResponseEntity<Void> deleteDocument(@PathVariable Long id)
             throws IOException {
@@ -64,7 +64,7 @@ public class DocumentController {
         return ResponseEntity.noContent().build();
     }
 
-    // GET /api/documents/{id}/download
+    
     @GetMapping("/api/documents/{id}/download")
     public ResponseEntity<Resource> downloadDocument(@PathVariable Long id)
             throws MalformedURLException {
