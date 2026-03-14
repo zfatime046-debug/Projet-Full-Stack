@@ -17,7 +17,20 @@ public class PhaseController {
     public PhaseController(PhaseService phaseService) {
         this.phaseService = phaseService;
     }
+    @PatchMapping("/{id}/realisation")
+    public Phase updateEtatRealisation(@PathVariable Long id, @RequestBody Boolean etat) {
+        return phaseService.updateEtatRealisation(id, etat);
+    }
 
+    @PatchMapping("/{id}/facturation")
+    public Phase updateEtatFacturation(@PathVariable Long id, @RequestBody Boolean etat) {
+        return phaseService.updateEtatFacturation(id, etat);
+    }
+
+    @PatchMapping("/{id}/paiement")
+    public Phase updateEtatPaiement(@PathVariable Long id, @RequestBody Boolean etat) {
+        return phaseService.updateEtatPaiement(id, etat);
+    }
     @PostMapping
     public Phase createPhase(@RequestBody PhaseRequest request) {
         return phaseService.createPhase(request);

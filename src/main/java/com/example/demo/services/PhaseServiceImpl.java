@@ -81,7 +81,35 @@ public class PhaseServiceImpl implements PhaseService {
     public List<Phase> getAllPhases() {
         return phaseRepository.findAll();
     }
+    @Override
+    public Phase updateEtatRealisation(Long id, Boolean etat) {
+        Phase phase = phaseRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Phase introuvable avec id : " + id));
 
+        phase.setEtatRealisation(etat ? "en cours" : "non realise");
+
+        return phaseRepository.save(phase);
+    }
+
+    @Override
+    public Phase updateEtatFacturation(Long id, Boolean etat) {
+        Phase phase = phaseRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Phase introuvable avec id : " + id));
+
+        phase.setEtatFacturation(etat ? "facture" : "non facture");
+
+        return phaseRepository.save(phase);
+    }
+
+    @Override
+    public Phase updateEtatPaiement(Long id, Boolean etat) {
+        Phase phase = phaseRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Phase introuvable avec id : " + id));
+
+        phase.setEtatPaiement(etat ? "paye" : "non paye");
+
+        return phaseRepository.save(phase);
+    }
     @Override
     public List<Phase> getPhasesByProjet(Long projetId) {
         return phaseRepository.findByProjetId(projetId);

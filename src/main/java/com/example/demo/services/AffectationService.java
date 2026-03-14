@@ -2,6 +2,7 @@ package com.example.demo.services;
 
 import com.example.demo.dto.AffectationRequest;
 import com.example.demo.entities.Affectation;
+import com.example.demo.entities.Phase;
 
 import java.util.List;
 
@@ -18,6 +19,6 @@ public interface AffectationService {
     List<Affectation> getAffectationsByPhase(Long phaseId);
 
     List<Affectation> getAffectationsByEmploye(Long employeId);
-
+    List<Phase> getPhasesByEmploye(Long employeId);
     void deleteAffectation(Long employeId, Long phaseId);
 }
