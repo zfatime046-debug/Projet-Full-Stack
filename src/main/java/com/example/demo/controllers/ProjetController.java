@@ -33,6 +33,7 @@ public class ProjetController {
     public Projet getProjetById(@PathVariable Long id) {
         return projetService.getProjetById(id);
     }
+
     @GetMapping("/{id}/resume")
     public String getResumeProjet(@PathVariable Long id) {
 
