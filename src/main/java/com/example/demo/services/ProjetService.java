@@ -16,8 +16,9 @@ public interface ProjetService {
     List<Projet> getAllProjets();
 
     List<Projet> getProjetsByOrganisme(Long organismeId);
-
     List<Projet> getProjetsByChefDeProjet(Long employeId);
 
+    List<Projet> getProjetsEnCours();
+    List<Projet> getProjetsClotures();
     void deleteProjet(Long id);
 }
