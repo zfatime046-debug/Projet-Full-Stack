@@ -6,5 +6,5 @@ import java.util.Optional;
 
 public interface FactureRepository extends JpaRepository<Facture, Long> {
     Optional<Facture> findByPhaseId(Long phaseId);
-    Optional<Facture> findByCode(String code);
+    boolean existsByPhaseId(Long phaseId);
 }

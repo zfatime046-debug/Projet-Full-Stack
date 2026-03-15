@@ -3,6 +3,7 @@ package com.example.demo.entities;
 import jakarta.persistence.*;
 import lombok.Data;
 import java.time.LocalDate;
+import java.math.BigDecimal;
 
 @Entity
 @Data
@@ -15,8 +16,12 @@ public class Facture {
 
     private String code;
     private LocalDate dateFacture;
+    private BigDecimal montant;
+
+    @Enumerated(EnumType.STRING)
+    private StatutFacture statut; // EMISE, PAYEE, ANNULEE
 
     @OneToOne
-    @JoinColumn(name = "phase_id")
+    @JoinColumn(name = "phase_id", unique = true)
     private Phase phase;
 }
