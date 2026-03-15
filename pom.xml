@@ -7,7 +7,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.4.3</version>   <!-- ✅ Version correcte -->
+		<version>3.4.3</version>
 		<relativePath/>
 	</parent>
 
@@ -105,22 +105,20 @@
 			<version>0.12.6</version>
 			<scope>runtime</scope>
 		</dependency>
-
-		<!-- ✅ Tests : Spring Boot Starter Test (géré par le parent) -->
-		<dependency>
+<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
 
-		<!-- Si vous voulez utiliser TestNG au lieu de JUnit -->
+
 		<dependency>
 			<groupId>org.testng</groupId>
 			<artifactId>testng</artifactId>
 			<version>7.12.0</version>
 			<scope>test</scope>
 		</dependency>
-		<!-- ⚠️  Note : Spring Boot Starter Test inclut JUnit, mais vous pouvez coexister -->
+
 	</dependencies>
 
 	<build>
