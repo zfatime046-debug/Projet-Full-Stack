@@ -7,6 +7,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
@@ -20,8 +21,8 @@ public class DocumentController {
 
     private final DocumentService documentService;
 
-    // POST /api/projets/{projetId}/documents
     @PostMapping("/api/projets/{projetId}/documents")
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'SECRETAIRE', 'CHEF')")
     public ResponseEntity<DocumentDTO> createDocument(
             @PathVariable Long projetId,
             @RequestBody DocumentDTO documentDTO
@@ -31,22 +32,22 @@ public class DocumentController {
         );
     }
 
-    // GET /api/projets/{projetId}/documents
     @GetMapping("/api/projets/{projetId}/documents")
+    @PreAuthorize("isAuthenticated()")
     public ResponseEntity<List<DocumentDTO>> getDocumentsByProjet(
             @PathVariable Long projetId) {
         return ResponseEntity.ok(
                 documentService.getDocumentsByProjet(projetId));
     }
 
-    // GET /api/documents/{id}
     @GetMapping("/api/documents/{id}")
+    @PreAuthorize("isAuthenticated()")
     public ResponseEntity<DocumentDTO> getDocumentById(@PathVariable Long id) {
         return ResponseEntity.ok(documentService.getDocumentById(id));
     }
 
-    // PUT /api/documents/{id}
     @PutMapping("/api/documents/{id}")
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'SECRETAIRE', 'CHEF')")
     public ResponseEntity<DocumentDTO> updateDocument(
             @PathVariable Long id,
             @RequestBody DocumentDTO documentDTO
@@ -56,16 +57,16 @@ public class DocumentController {
         );
     }
 
-    // DELETE /api/documents/{id}
     @DeleteMapping("/api/documents/{id}")
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'SECRETAIRE', 'CHEF')")
     public ResponseEntity<Void> deleteDocument(@PathVariable Long id)
             throws IOException {
         documentService.deleteDocument(id);
         return ResponseEntity.noContent().build();
     }
 
-    // GET /api/documents/{id}/download
     @GetMapping("/api/documents/{id}/download")
+    @PreAuthorize("isAuthenticated()")
     public ResponseEntity<Resource> downloadDocument(@PathVariable Long id)
             throws MalformedURLException {
         Resource resource = documentService.downloadDocument(id);
