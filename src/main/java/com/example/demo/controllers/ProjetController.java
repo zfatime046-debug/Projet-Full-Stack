@@ -4,6 +4,7 @@ import com.example.demo.dto.ProjetRequest;
 import com.example.demo.entities.Phase;
 import com.example.demo.entities.Projet;
 import com.example.demo.services.ProjetService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,21 +21,25 @@ public class ProjetController {
     }
 
     @PostMapping
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'SECRETAIRE', 'DIRECTEUR')")
     public Projet createProjet(@RequestBody ProjetRequest request) {
         return projetService.createProjet(request);
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'SECRETAIRE', 'DIRECTEUR')")
     public Projet updateProjet(@PathVariable Long id, @RequestBody ProjetRequest request) {
         return projetService.updateProjet(id, request);
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("isAuthenticated()")
     public Projet getProjetById(@PathVariable Long id) {
         return projetService.getProjetById(id);
     }
 
     @GetMapping("/{id}/resume")
+    @PreAuthorize("isAuthenticated()")
     public String getResumeProjet(@PathVariable Long id) {
 
         Projet projet = projetService.getProjetById(id);
@@ -56,21 +61,25 @@ public class ProjetController {
                 " | Montant total des phases : " + totalPhases;
     }
     @GetMapping
+    @PreAuthorize("isAuthenticated()")
     public List<Projet> getAllProjets() {
         return projetService.getAllProjets();
     }
 
     @GetMapping("/organisme/{organismeId}")
+    @PreAuthorize("isAuthenticated()")
     public List<Projet> getProjetsByOrganisme(@PathVariable Long organismeId) {
         return projetService.getProjetsByOrganisme(organismeId);
     }
 
     @GetMapping("/chef/{employeId}")
+    @PreAuthorize("isAuthenticated()")
     public List<Projet> getProjetsByChefDeProjet(@PathVariable Long employeId) {
         return projetService.getProjetsByChefDeProjet(employeId);
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public void deleteProjet(@PathVariable Long id) {
         projetService.deleteProjet(id);
     }

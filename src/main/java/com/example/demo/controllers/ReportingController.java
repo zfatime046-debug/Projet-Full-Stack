@@ -15,7 +15,7 @@ import java.util.List;
 @RequestMapping("/api/reporting")
 @RequiredArgsConstructor
 @CrossOrigin("*")
-public class ReportingController {
+public class  ReportingController {
 
     private final ReportingService reportingService;
     @GetMapping("/projets/en-cours/chef/{chefProjetId}")
