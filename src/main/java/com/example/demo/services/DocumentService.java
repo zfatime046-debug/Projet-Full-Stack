@@ -33,7 +33,7 @@ public class DocumentService {
     @Value("${file.upload-dir:uploads}")
     private String uploadDir;
 
-    // ── Créer un document + upload fichier optionnel ──────────────────────────
+   
     public DocumentDTO createDocument(Long projetId,
                                       DocumentDTO documentDTO,
                                       MultipartFile file) throws IOException {
@@ -53,7 +53,7 @@ public class DocumentService {
         return documentMapper.toDTO(documentRepository.save(document));
     }
 
-    // ── Lister les documents d'un projet ─────────────────────────────────────
+    
     public List<DocumentDTO> getDocumentsByProjet(Long projetId) {
         if (!projetRepository.existsById(projetId))
             throw new ResourceNotFoundException(
@@ -65,7 +65,7 @@ public class DocumentService {
                 .collect(Collectors.toList());
     }
 
-    // ── Consulter un document par id ──────────────────────────────────────────
+    
     public DocumentDTO getDocumentById(Long id) {
         Document document = documentRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException(
@@ -73,7 +73,7 @@ public class DocumentService {
         return documentMapper.toDTO(document);
     }
 
-    // ── Mettre à jour métadonnées + fichier optionnel ─────────────────────────
+    
     public DocumentDTO updateDocument(Long id,
                                       DocumentDTO documentDTO,
                                       MultipartFile file) throws IOException {
@@ -94,7 +94,7 @@ public class DocumentService {
         return documentMapper.toDTO(documentRepository.save(document));
     }
 
-    // ── Supprimer un document (DB + fichier physique) ─────────────────────────
+    
     public void deleteDocument(Long id) throws IOException {
         Document document = documentRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException(
@@ -104,7 +104,7 @@ public class DocumentService {
         documentRepository.delete(document);
     }
 
-    // ── Télécharger le fichier d'un document ──────────────────────────────────
+    
     public Resource downloadDocument(Long id) throws MalformedURLException {
         Document document = documentRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException(
@@ -124,7 +124,7 @@ public class DocumentService {
         return resource;
     }
 
-    // ── Helpers privés ────────────────────────────────────────────────────────
+    
     private String saveFile(MultipartFile file, Long projetId) throws IOException {
         Path uploadPath = Paths.get(uploadDir, "projets", projetId.toString());
         Files.createDirectories(uploadPath);

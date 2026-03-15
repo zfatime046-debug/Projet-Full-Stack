@@ -1,0 +1,133 @@
+package com.example.demo.services;
+
+import com.example.demo.dto.TableauDeBordDTO;
+import com.example.demo.entities.Phase;
+import com.example.demo.entities.Projet;
+import com.example.demo.repositories.PhaseRepository;
+import com.example.demo.repositories.ProjetRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.stereotype.Service;
+
+import java.time.LocalDate;
+import java.util.List;
+
+@Service
+@RequiredArgsConstructor
+public class ReportingServiceImpl implements ReportingService {
+
+    private final PhaseRepository phaseRepository;
+    private final ProjetRepository projetRepository;
+
+    @Override
+    public List<Phase> getPhasesTermineesNonFacturees() {
+        return phaseRepository.findByEtatRealisationAndEtatFacturation("realise", "non facture");
+    }
+
+    @Override
+    public List<Phase> getPhasesFactureesNonPayees() {
+        return phaseRepository.findByEtatFacturationAndEtatPaiement("facture", "non paye");
+    }
+
+    @Override
+    public List<Phase> getPhasesPayees() {
+        return phaseRepository.findByEtatPaiement("paye");
+    }
+
+    @Override
+    public List<Projet> getProjetsEnCours() {
+        LocalDate today = LocalDate.now();
+        return projetRepository.findByDateDebutLessThanEqualAndDateFinGreaterThanEqual(today, today);
+    }
+
+    @Override
+    public List<Projet> getProjetsClotures() {
+        return projetRepository.findByDateFinBefore(LocalDate.now());
+    }
+
+    @Override
+    public TableauDeBordDTO getTableauDeBord() {
+        List<Projet> projetsEnCours = getProjetsEnCours();
+        List<Projet> projetsClotures = getProjetsClotures();
+        List<Phase> phasesTermineesNonFacturees = getPhasesTermineesNonFacturees();
+        List<Phase> phasesFactureesNonPayees = getPhasesFactureesNonPayees();
+        List<Phase> phasesPayees = getPhasesPayees();
+
+        TableauDeBordDTO dto = new TableauDeBordDTO();
+        dto.setNombreProjetsEnCours(projetsEnCours.size());
+        dto.setNombreProjetsClotures(projetsClotures.size());
+        dto.setNombrePhasesTermineesNonFacturees(phasesTermineesNonFacturees.size());
+        dto.setNombrePhasesFactureesNonPayees(phasesFactureesNonPayees.size());
+        dto.setNombrePhasesPayees(phasesPayees.size());
+
+        return dto;
+    }
+
+    @Override
+    public List<Projet> getProjetsEnCoursByChef(Long chefProjetId) {
+        LocalDate today = LocalDate.now();
+        return projetRepository.findByChefDeProjetIdAndDateDebutLessThanEqualAndDateFinGreaterThanEqual(
+                chefProjetId, today, today
+        );
+    }
+
+    @Override
+    public List<Projet> getProjetsCloturesByChef(Long chefProjetId) {
+        return projetRepository.findByChefDeProjetIdAndDateFinBefore(
+                chefProjetId, LocalDate.now()
+        );
+    }
+
+    @Override
+    public List<Phase> getPhasesTermineesNonFactureesByProjet(Long projetId) {
+        return phaseRepository.findByProjetIdAndEtatRealisationAndEtatFacturation(
+                projetId, "realise", "non facture"
+        );
+    }
+
+    @Override
+    public List<Phase> getPhasesFactureesNonPayeesByProjet(Long projetId) {
+        return phaseRepository.findByProjetIdAndEtatFacturationAndEtatPaiement(
+                projetId, "facture", "non paye"
+        );
+    }
+
+    @Override
+    public List<Phase> getPhasesPayeesByProjet(Long projetId) {
+        return phaseRepository.findByProjetIdAndEtatPaiement(
+                projetId, "paye"
+        );
+    }
+
+    @Override
+    public List<Projet> getProjetsEnCoursByPeriode(LocalDate dateDebut, LocalDate dateFin) {
+        return projetRepository.findByDateDebutBetween(dateDebut, dateFin);
+    }
+
+    @Override
+    public List<Projet> getProjetsCloturesByPeriode(LocalDate dateDebut, LocalDate dateFin) {
+        return projetRepository.findByDateFinBetween(dateDebut, dateFin);
+    }
+
+    @Override
+    public Page<Phase> getPhasesTermineesNonFactureesPage(int page, int size) {
+        return phaseRepository.findByEtatRealisationAndEtatFacturation(
+                "realise", "non facture", PageRequest.of(page, size)
+        );
+    }
+
+    @Override
+    public Page<Phase> getPhasesFactureesNonPayeesPage(int page, int size) {
+        return phaseRepository.findByEtatFacturationAndEtatPaiement(
+                "facture", "non paye", PageRequest.of(page, size)
+        );
+    }
+
+    @Override
+    public Page<Phase> getPhasesPayeesPage(int page, int size) {
+        return phaseRepository.findByEtatPaiement(
+                "paye", PageRequest.of(page, size)
+        );
+    }
+}

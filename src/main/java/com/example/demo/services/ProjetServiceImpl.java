@@ -12,6 +12,7 @@ import com.example.demo.repositories.OrganismeRepository;
 import com.example.demo.repositories.ProjetRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,7 +30,12 @@ public class ProjetServiceImpl implements ProjetService {
         this.organismeRepository = organismeRepository;
         this.employeRepository = employeRepository;
     }
-
+    @Override
+    public List<Projet> getProjetsEnCours() {
+        LocalDate today = LocalDate.now();
+        return projetRepository
+                .findByDateDebutLessThanEqualAndDateFinGreaterThanEqual(today, today);
+    }
     @Override
     public Projet createProjet(ProjetRequest request) {
         validateProjet(request, null);
@@ -101,7 +107,10 @@ public class ProjetServiceImpl implements ProjetService {
     public List<Projet> getProjetsByOrganisme(Long organismeId) {
         return projetRepository.findByOrganismeId(organismeId);
     }
-
+    @Override
+    public List<Projet> getProjetsClotures() {
+        return projetRepository.findByDateFinBefore(LocalDate.now());
+    }
     @Override
     public List<Projet> getProjetsByChefDeProjet(Long employeId) {
         return projetRepository.findByChefDeProjetId(employeId);
