@@ -22,19 +22,16 @@ public class ReportingServiceImpl implements ReportingService {
 
     @Override
     public List<Phase> getPhasesTermineesNonFacturees() {
-        // "realise" → true, "non facture" → false
         return phaseRepository.findByEtatRealisationAndEtatFacturation(true, false);
     }
 
     @Override
     public List<Phase> getPhasesFactureesNonPayees() {
-        // "facture" → true, "non paye" → false
         return phaseRepository.findByEtatFacturationAndEtatPaiement(true, false);
     }
 
     @Override
     public List<Phase> getPhasesPayees() {
-        // "paye" → true
         return phaseRepository.findByEtatPaiement(true);
     }
 
@@ -84,7 +81,6 @@ public class ReportingServiceImpl implements ReportingService {
 
     @Override
     public List<Phase> getPhasesTermineesNonFactureesByProjet(Long projetId) {
-        // "realise" → true, "non facture" → false
         return phaseRepository.findByProjetIdAndEtatRealisationAndEtatFacturation(
                 projetId, true, false
         );
@@ -92,7 +88,6 @@ public class ReportingServiceImpl implements ReportingService {
 
     @Override
     public List<Phase> getPhasesFactureesNonPayeesByProjet(Long projetId) {
-        // "facture" → true, "non paye" → false
         return phaseRepository.findByProjetIdAndEtatFacturationAndEtatPaiement(
                 projetId, true, false
         );
@@ -100,7 +95,6 @@ public class ReportingServiceImpl implements ReportingService {
 
     @Override
     public List<Phase> getPhasesPayeesByProjet(Long projetId) {
-        // "paye" → true
         return phaseRepository.findByProjetIdAndEtatPaiement(
                 projetId, true
         );
@@ -118,7 +112,6 @@ public class ReportingServiceImpl implements ReportingService {
 
     @Override
     public Page<Phase> getPhasesTermineesNonFactureesPage(int page, int size) {
-        // "realise" → true, "non facture" → false
         return phaseRepository.findByEtatRealisationAndEtatFacturation(
                 true, false, PageRequest.of(page, size)
         );
@@ -126,7 +119,6 @@ public class ReportingServiceImpl implements ReportingService {
 
     @Override
     public Page<Phase> getPhasesFactureesNonPayeesPage(int page, int size) {
-        // "facture" → true, "non paye" → false
         return phaseRepository.findByEtatFacturationAndEtatPaiement(
                 true, false, PageRequest.of(page, size)
         );
@@ -134,7 +126,6 @@ public class ReportingServiceImpl implements ReportingService {
 
     @Override
     public Page<Phase> getPhasesPayeesPage(int page, int size) {
-        // "paye" → true
         return phaseRepository.findByEtatPaiement(
                 true, PageRequest.of(page, size)
         );

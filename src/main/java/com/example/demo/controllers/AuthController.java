@@ -9,6 +9,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -33,5 +34,11 @@ public class AuthController {
                                                  @Valid @RequestBody ChangePasswordDTO dto) {
         authService.changePassword(authentication.getName(), dto);
         return ResponseEntity.ok("Mot de passe modifié avec succès");
+    }
+
+    // ⚠️ TEMPORAIRE - Supprimer après utilisation
+    @GetMapping("/hash")
+    public String hash(@RequestParam String password) {
+        return new BCryptPasswordEncoder().encode(password);
     }
 }

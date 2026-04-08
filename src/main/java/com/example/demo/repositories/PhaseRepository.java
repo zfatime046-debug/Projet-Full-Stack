@@ -18,15 +18,12 @@ public interface PhaseRepository extends JpaRepository<Phase, Long> {
 
     List<Phase> findByProjetId(Long projetId);
 
-
+    // Requêtes dérivées simples
     List<Phase> findByEtatRealisationAndEtatFacturation(Boolean etatRealisation, Boolean etatFacturation);
-
 
     List<Phase> findByEtatFacturationAndEtatPaiement(Boolean etatFacturation, Boolean etatPaiement);
 
-
     List<Phase> findByEtatPaiement(Boolean etatPaiement);
-
 
     List<Phase> findByProjetIdAndEtatRealisationAndEtatFacturation(
             Long projetId,
@@ -34,26 +31,28 @@ public interface PhaseRepository extends JpaRepository<Phase, Long> {
             Boolean etatFacturation
     );
 
-
     List<Phase> findByProjetIdAndEtatFacturationAndEtatPaiement(
             Long projetId,
             Boolean etatFacturation,
             Boolean etatPaiement
     );
 
-
     List<Phase> findByProjetIdAndEtatPaiement(
             Long projetId,
             Boolean etatPaiement
     );
 
+    // Celles utilisées dans tes tests
+    List<Phase> findByEtatRealisationTrueAndEtatFacturationFalse();
 
+    List<Phase> findByEtatFacturationTrueAndEtatPaiementFalse();
+
+    // Pagination
     Page<Phase> findByEtatRealisationAndEtatFacturation(
             Boolean etatRealisation,
             Boolean etatFacturation,
             Pageable pageable
     );
-
 
     Page<Phase> findByEtatFacturationAndEtatPaiement(
             Boolean etatFacturation,
@@ -61,13 +60,12 @@ public interface PhaseRepository extends JpaRepository<Phase, Long> {
             Pageable pageable
     );
 
-
     Page<Phase> findByEtatPaiement(
             Boolean etatPaiement,
             Pageable pageable
     );
 
-
+    // Requêtes personnalisées
     @Query("SELECT p FROM Phase p WHERE p.etatRealisation = :etatRealisation AND p.etatFacturation = :etatFacturation")
     List<Phase> findPhasesByEtatRealisationAndFacturation(
             @Param("etatRealisation") Boolean etatRealisation,
