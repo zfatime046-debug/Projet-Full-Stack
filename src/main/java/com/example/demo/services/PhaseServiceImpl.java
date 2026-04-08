@@ -63,9 +63,9 @@ public class PhaseServiceImpl implements PhaseService {
         phase.setDateDebut(request.getDateDebut());
         phase.setDateFin(request.getDateFin());
         phase.setMontant(request.getMontant());
-        phase.setEtatRealisation(request.isEtatRealisation() ? "en cours" : "non realise");
-        phase.setEtatFacturation(request.isEtatFacturation() ? "facture" : "non facture");
-        phase.setEtatPaiement(request.isEtatPaiement() ? "paye" : "non paye");
+        phase.setEtatRealisation(Boolean.valueOf(request.isEtatRealisation() ? "en cours" : "non realise"));
+        phase.setEtatFacturation(Boolean.valueOf(request.isEtatFacturation() ? "facture" : "non facture"));
+        phase.setEtatPaiement(Boolean.valueOf(request.isEtatPaiement() ? "paye" : "non paye"));
         phase.setProjet(projet);
 
         return phaseRepository.save(phase);
@@ -86,7 +86,7 @@ public class PhaseServiceImpl implements PhaseService {
         Phase phase = phaseRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Phase introuvable avec id : " + id));
 
-        phase.setEtatRealisation(etat ? "en cours" : "non realise");
+        phase.setEtatRealisation(Boolean.valueOf(etat ? "en cours" : "non realise"));
 
         return phaseRepository.save(phase);
     }
@@ -96,7 +96,7 @@ public class PhaseServiceImpl implements PhaseService {
         Phase phase = phaseRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Phase introuvable avec id : " + id));
 
-        phase.setEtatFacturation(etat ? "facture" : "non facture");
+        phase.setEtatFacturation(Boolean.valueOf(etat ? "facture" : "non facture"));
 
         return phaseRepository.save(phase);
     }
@@ -106,7 +106,7 @@ public class PhaseServiceImpl implements PhaseService {
         Phase phase = phaseRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Phase introuvable avec id : " + id));
 
-        phase.setEtatPaiement(etat ? "paye" : "non paye");
+        phase.setEtatPaiement(Boolean.valueOf(etat ? "paye" : "non paye"));
 
         return phaseRepository.save(phase);
     }

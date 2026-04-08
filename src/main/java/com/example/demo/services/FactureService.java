@@ -39,7 +39,7 @@ public class FactureService {
         facture.setStatut(StatutFacture.EMISE);
         facture.setPhase(phase);
 
-        phase.setEtatFacturation("FACTUREE");
+        phase.setEtatFacturation(Boolean.valueOf("FACTUREE"));
         phaseRepository.save(phase);
 
         return toDTO(factureRepository.save(facture));

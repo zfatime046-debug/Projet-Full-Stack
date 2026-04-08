@@ -22,17 +22,20 @@ public class ReportingServiceImpl implements ReportingService {
 
     @Override
     public List<Phase> getPhasesTermineesNonFacturees() {
-        return phaseRepository.findByEtatRealisationAndEtatFacturation("realise", "non facture");
+        // "realise" → true, "non facture" → false
+        return phaseRepository.findByEtatRealisationAndEtatFacturation(true, false);
     }
 
     @Override
     public List<Phase> getPhasesFactureesNonPayees() {
-        return phaseRepository.findByEtatFacturationAndEtatPaiement("facture", "non paye");
+        // "facture" → true, "non paye" → false
+        return phaseRepository.findByEtatFacturationAndEtatPaiement(true, false);
     }
 
     @Override
     public List<Phase> getPhasesPayees() {
-        return phaseRepository.findByEtatPaiement("paye");
+        // "paye" → true
+        return phaseRepository.findByEtatPaiement(true);
     }
 
     @Override
@@ -81,22 +84,25 @@ public class ReportingServiceImpl implements ReportingService {
 
     @Override
     public List<Phase> getPhasesTermineesNonFactureesByProjet(Long projetId) {
+        // "realise" → true, "non facture" → false
         return phaseRepository.findByProjetIdAndEtatRealisationAndEtatFacturation(
-                projetId, "realise", "non facture"
+                projetId, true, false
         );
     }
 
     @Override
     public List<Phase> getPhasesFactureesNonPayeesByProjet(Long projetId) {
+        // "facture" → true, "non paye" → false
         return phaseRepository.findByProjetIdAndEtatFacturationAndEtatPaiement(
-                projetId, "facture", "non paye"
+                projetId, true, false
         );
     }
 
     @Override
     public List<Phase> getPhasesPayeesByProjet(Long projetId) {
+        // "paye" → true
         return phaseRepository.findByProjetIdAndEtatPaiement(
-                projetId, "paye"
+                projetId, true
         );
     }
 
@@ -112,22 +118,25 @@ public class ReportingServiceImpl implements ReportingService {
 
     @Override
     public Page<Phase> getPhasesTermineesNonFactureesPage(int page, int size) {
+        // "realise" → true, "non facture" → false
         return phaseRepository.findByEtatRealisationAndEtatFacturation(
-                "realise", "non facture", PageRequest.of(page, size)
+                true, false, PageRequest.of(page, size)
         );
     }
 
     @Override
     public Page<Phase> getPhasesFactureesNonPayeesPage(int page, int size) {
+        // "facture" → true, "non paye" → false
         return phaseRepository.findByEtatFacturationAndEtatPaiement(
-                "facture", "non paye", PageRequest.of(page, size)
+                true, false, PageRequest.of(page, size)
         );
     }
 
     @Override
     public Page<Phase> getPhasesPayeesPage(int page, int size) {
+        // "paye" → true
         return phaseRepository.findByEtatPaiement(
-                "paye", PageRequest.of(page, size)
+                true, PageRequest.of(page, size)
         );
     }
 }
