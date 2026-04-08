@@ -2,6 +2,7 @@ package com.example.demo.dto;
 
 import jakarta.validation.constraints.*;
 import lombok.Data;
+
 import java.time.LocalDate;
 
 @Data
@@ -24,9 +25,9 @@ public class PhaseRequest {
     @Positive(message = "Le montant doit être positif")
     private double montant;
 
-    private boolean etatRealisation;
-    private boolean etatFacturation;
-    private boolean etatPaiement;
+    private Boolean etatRealisation = false;
+    private Boolean etatFacturation = false;
+    private Boolean etatPaiement = false;
 
     @NotNull(message = "Le projet est obligatoire")
     private Long projetId;
