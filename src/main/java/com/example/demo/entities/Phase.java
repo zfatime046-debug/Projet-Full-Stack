@@ -24,9 +24,9 @@ public class Phase {
     private LocalDate dateDebut;
     private LocalDate dateFin;
     private double montant;
-    private String etatRealisation;
-    private String etatFacturation;
-    private String etatPaiement;
+    private Boolean etatRealisation;
+    private Boolean etatFacturation;
+    private Boolean etatPaiement;
 
     @ManyToOne
     @JoinColumn(name = "projet_id")
