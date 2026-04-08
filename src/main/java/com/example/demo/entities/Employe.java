@@ -14,12 +14,14 @@ public class Employe {
 
     @Column(unique = true)
     private String matricule;
+
     private String nom;
     private String prenom;
     private String telephone;
     private String email;
     private String login;
     private String password;
+    private Boolean actif;
 
     @ManyToOne
     @JoinColumn(name = "profil_id")

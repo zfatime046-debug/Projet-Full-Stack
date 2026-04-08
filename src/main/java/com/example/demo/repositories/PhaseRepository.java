@@ -18,93 +18,94 @@ public interface PhaseRepository extends JpaRepository<Phase, Long> {
 
     List<Phase> findByProjetId(Long projetId);
 
-
     // Requêtes dérivées simples
+    List<Phase> findByEtatRealisationAndEtatFacturation(Boolean etatRealisation, Boolean etatFacturation);
 
-    List<Phase> findByEtatRealisationAndEtatFacturation(String etatRealisation, String etatFacturation);
+    List<Phase> findByEtatFacturationAndEtatPaiement(Boolean etatFacturation, Boolean etatPaiement);
 
-    List<Phase> findByEtatFacturationAndEtatPaiement(String etatFacturation, String etatPaiement);
-
-    List<Phase> findByEtatPaiement(String etatPaiement);
+    List<Phase> findByEtatPaiement(Boolean etatPaiement);
 
     List<Phase> findByProjetIdAndEtatRealisationAndEtatFacturation(
             Long projetId,
-            String etatRealisation,
-            String etatFacturation
+            Boolean etatRealisation,
+            Boolean etatFacturation
     );
 
     List<Phase> findByProjetIdAndEtatFacturationAndEtatPaiement(
             Long projetId,
-            String etatFacturation,
-            String etatPaiement
+            Boolean etatFacturation,
+            Boolean etatPaiement
     );
 
     List<Phase> findByProjetIdAndEtatPaiement(
             Long projetId,
-            String etatPaiement
+            Boolean etatPaiement
     );
 
-    // Pagination
+    // Celles utilisées dans tes tests
+    List<Phase> findByEtatRealisationTrueAndEtatFacturationFalse();
 
+    List<Phase> findByEtatFacturationTrueAndEtatPaiementFalse();
+
+    // Pagination
     Page<Phase> findByEtatRealisationAndEtatFacturation(
-            String etatRealisation,
-            String etatFacturation,
+            Boolean etatRealisation,
+            Boolean etatFacturation,
             Pageable pageable
     );
 
     Page<Phase> findByEtatFacturationAndEtatPaiement(
-            String etatFacturation,
-            String etatPaiement,
+            Boolean etatFacturation,
+            Boolean etatPaiement,
             Pageable pageable
     );
 
     Page<Phase> findByEtatPaiement(
-            String etatPaiement,
+            Boolean etatPaiement,
             Pageable pageable
     );
 
     // Requêtes personnalisées
-
     @Query("SELECT p FROM Phase p WHERE p.etatRealisation = :etatRealisation AND p.etatFacturation = :etatFacturation")
     List<Phase> findPhasesByEtatRealisationAndFacturation(
-            @Param("etatRealisation") String etatRealisation,
-            @Param("etatFacturation") String etatFacturation
+            @Param("etatRealisation") Boolean etatRealisation,
+            @Param("etatFacturation") Boolean etatFacturation
     );
 
     @Query("SELECT p FROM Phase p WHERE p.etatFacturation = :etatFacturation AND p.etatPaiement = :etatPaiement")
     List<Phase> findPhasesByEtatFacturationAndPaiement(
-            @Param("etatFacturation") String etatFacturation,
-            @Param("etatPaiement") String etatPaiement
+            @Param("etatFacturation") Boolean etatFacturation,
+            @Param("etatPaiement") Boolean etatPaiement
     );
 
     @Query("SELECT p FROM Phase p WHERE p.etatPaiement = :etatPaiement")
     List<Phase> findPhasesByEtatPaiementCustom(
-            @Param("etatPaiement") String etatPaiement
+            @Param("etatPaiement") Boolean etatPaiement
     );
 
     @Query("SELECT p FROM Phase p WHERE p.projet.id = :projetId AND p.etatRealisation = :etatRealisation AND p.etatFacturation = :etatFacturation")
     List<Phase> findPhasesTermineesNonFactureesByProjetCustom(
             @Param("projetId") Long projetId,
-            @Param("etatRealisation") String etatRealisation,
-            @Param("etatFacturation") String etatFacturation
+            @Param("etatRealisation") Boolean etatRealisation,
+            @Param("etatFacturation") Boolean etatFacturation
     );
 
     @Query("SELECT p FROM Phase p WHERE p.projet.id = :projetId AND p.etatFacturation = :etatFacturation AND p.etatPaiement = :etatPaiement")
     List<Phase> findPhasesFactureesNonPayeesByProjetCustom(
             @Param("projetId") Long projetId,
-            @Param("etatFacturation") String etatFacturation,
-            @Param("etatPaiement") String etatPaiement
+            @Param("etatFacturation") Boolean etatFacturation,
+            @Param("etatPaiement") Boolean etatPaiement
     );
 
     @Query("SELECT p FROM Phase p WHERE p.projet.id = :projetId AND p.etatPaiement = :etatPaiement")
     List<Phase> findPhasesPayeesByProjetCustom(
             @Param("projetId") Long projetId,
-            @Param("etatPaiement") String etatPaiement
+            @Param("etatPaiement") Boolean etatPaiement
     );
 
     @Query("SELECT p FROM Phase p WHERE p.etatPaiement = :etatPaiement")
     Page<Phase> findPhasesPayeesCustomPage(
-            @Param("etatPaiement") String etatPaiement,
+            @Param("etatPaiement") Boolean etatPaiement,
             Pageable pageable
     );
 }

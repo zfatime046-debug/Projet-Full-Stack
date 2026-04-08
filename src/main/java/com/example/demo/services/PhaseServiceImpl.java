@@ -63,9 +63,9 @@ public class PhaseServiceImpl implements PhaseService {
         phase.setDateDebut(request.getDateDebut());
         phase.setDateFin(request.getDateFin());
         phase.setMontant(request.getMontant());
-        phase.setEtatRealisation(request.isEtatRealisation() ? "en cours" : "non realise");
-        phase.setEtatFacturation(request.isEtatFacturation() ? "facture" : "non facture");
-        phase.setEtatPaiement(request.isEtatPaiement() ? "paye" : "non paye");
+        phase.setEtatRealisation(request.getEtatRealisation());
+        phase.setEtatFacturation(request.getEtatFacturation());
+        phase.setEtatPaiement(request.getEtatPaiement());
         phase.setProjet(projet);
 
         return phaseRepository.save(phase);
@@ -81,12 +81,13 @@ public class PhaseServiceImpl implements PhaseService {
     public List<Phase> getAllPhases() {
         return phaseRepository.findAll();
     }
+
     @Override
     public Phase updateEtatRealisation(Long id, Boolean etat) {
         Phase phase = phaseRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Phase introuvable avec id : " + id));
 
-        phase.setEtatRealisation(etat ? "en cours" : "non realise");
+        phase.setEtatRealisation(etat);
 
         return phaseRepository.save(phase);
     }
@@ -96,7 +97,7 @@ public class PhaseServiceImpl implements PhaseService {
         Phase phase = phaseRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Phase introuvable avec id : " + id));
 
-        phase.setEtatFacturation(etat ? "facture" : "non facture");
+        phase.setEtatFacturation(etat);
 
         return phaseRepository.save(phase);
     }
@@ -106,10 +107,11 @@ public class PhaseServiceImpl implements PhaseService {
         Phase phase = phaseRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Phase introuvable avec id : " + id));
 
-        phase.setEtatPaiement(etat ? "paye" : "non paye");
+        phase.setEtatPaiement(etat);
 
         return phaseRepository.save(phase);
     }
+
     @Override
     public List<Phase> getPhasesByProjet(Long projetId) {
         return phaseRepository.findByProjetId(projetId);
