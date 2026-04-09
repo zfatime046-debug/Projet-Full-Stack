@@ -11,11 +11,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKey;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 @Service
 public class JwtService {
@@ -39,17 +37,19 @@ public class JwtService {
         keyBytes = Arrays.copyOf(keyBytes, 32);
         this.signingKey = Keys.hmacShaKeyFor(keyBytes);
     }
-
     public String generateToken(UserDetails userDetails) {
         Map<String, Object> claims = new HashMap<>();
 
-        String role = userDetails.getAuthorities()
-                .stream()
-                .map(GrantedAuthority::getAuthority)
-                .findFirst()
-                .orElse("ROLE_USER");
 
-        claims.put("role", role.replace("ROLE_", ""));
+        List<String> authorities = userDetails.getAuthorities().stream()
+                .map(GrantedAuthority::getAuthority)
+                .collect(Collectors.toList());
+
+        claims.put("authorities", authorities);
+        claims.put("role", authorities.get(0));
+
+        System.out.println("Génération token pour: " + userDetails.getUsername());
+        System.out.println("Autorités: " + authorities);
 
         return Jwts.builder()
                 .claims(claims)
@@ -59,6 +59,7 @@ public class JwtService {
                 .signWith(signingKey)
                 .compact();
     }
+
 
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);

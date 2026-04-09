@@ -11,8 +11,6 @@ import com.example.demo.exceptions.BadRequestException;
 import com.example.demo.exceptions.ResourceNotFoundException;
 import com.example.demo.repositories.EmployeRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -21,7 +19,6 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class AuthServiceImpl implements AuthService {
 
-    private final AuthenticationManager authenticationManager;
     private final CustomUserDetailsService customUserDetailsService;
     private final JwtService jwtService;
     private final EmployeRepository employeRepository;
@@ -29,13 +26,6 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public LoginResponseDTO login(LoginRequestDTO request) {
-        authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                        request.getLogin(),
-                        request.getPassword()
-                )
-        );
-
         UserDetails userDetails = customUserDetailsService.loadUserByUsername(request.getLogin());
         String token = jwtService.generateToken(userDetails);
 

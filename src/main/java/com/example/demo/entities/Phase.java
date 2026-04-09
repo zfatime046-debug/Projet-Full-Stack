@@ -1,6 +1,7 @@
 package com.example.demo.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -30,16 +31,18 @@ public class Phase {
 
     @ManyToOne
     @JoinColumn(name = "projet_id")
-    @JsonBackReference
+    @JsonIgnore
     private Projet projet;
 
     @OneToMany(mappedBy = "phase", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Livrable> livrables;
 
     @OneToOne(mappedBy = "phase", cascade = CascadeType.ALL)
+    @JsonIgnore
     private Facture facture;
 
     @OneToMany(mappedBy = "phase", cascade = CascadeType.ALL)
-    @JsonManagedReference
+    @JsonIgnore
     private List<Affectation> affectations;
 }

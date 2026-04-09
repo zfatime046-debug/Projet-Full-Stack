@@ -1,12 +1,13 @@
 package com.example.demo.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
 import java.util.List;
 
-@Entity
 @Data
+@Entity
 @Table(name = "organismes")
 public class Organisme {
 
@@ -22,6 +23,7 @@ public class Organisme {
     private String emailContact;
     private String siteWeb;
 
-    @OneToMany(mappedBy = "organisme", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "organisme")
+    @JsonIgnore
     private List<Projet> projets;
 }

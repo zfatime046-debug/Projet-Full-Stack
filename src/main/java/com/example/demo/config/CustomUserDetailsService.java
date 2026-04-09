@@ -30,7 +30,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         return User.builder()
                 .username(employe.getLogin())
                 .password(employe.getPassword())
-                .authorities(List.of(new SimpleGrantedAuthority("ROLE_" + role)))
+                .authorities(List.of(new SimpleGrantedAuthority(role)))  // ← MODIFIÉ (supprimé ROLE_)
                 .disabled(!enabled)
                 .build();
     }

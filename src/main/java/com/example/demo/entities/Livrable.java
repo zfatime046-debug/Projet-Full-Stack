@@ -1,5 +1,6 @@
 package com.example.demo.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -19,5 +20,6 @@ public class Livrable {
 
     @ManyToOne
     @JoinColumn(name = "phase_id")
+    @JsonIgnore
     private Phase phase;
 }

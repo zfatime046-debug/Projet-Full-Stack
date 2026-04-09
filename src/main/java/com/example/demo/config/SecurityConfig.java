@@ -16,9 +16,14 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import java.util.List;
 
 @Configuration
-@EnableMethodSecurity
+//@EnableMethodSecurity
 @RequiredArgsConstructor
 public class SecurityConfig {
 
@@ -34,6 +39,7 @@ public class SecurityConfig {
                         session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 )
                 .authorizeHttpRequests(auth -> auth
+                        // endpoints publics
                         .requestMatchers(
                                 "/",
                                 "/api/auth/**",
@@ -42,23 +48,17 @@ public class SecurityConfig {
                                 "/v3/api-docs/**"
                         ).permitAll()
 
-                        .requestMatchers(HttpMethod.GET, "/api/reporting/**")
-                        .hasAnyRole("ADMIN", "DIRECTEUR")
-
-                        .requestMatchers("/api/employes/**")
-                        .hasRole("ADMIN")
-
+                        // autoriser tous les GET pour toutes tes tables
+                        .requestMatchers("/api/**").permitAll()
+                        // sécuriser POST/PUT/DELETE
+                        .requestMatchers("/api/employes/**").hasRole("ADMIN")
                         .requestMatchers("/api/organismes/**", "/api/projets/**")
                         .hasAnyRole("ADMIN", "SECRETAIRE", "DIRECTEUR")
-
                         .requestMatchers("/api/phases/**", "/api/livrables/**")
                         .hasAnyRole("ADMIN", "CHEF_PROJET", "DIRECTEUR")
-
                         .requestMatchers("/api/factures/**")
                         .hasAnyRole("ADMIN", "COMPTABLE", "DIRECTEUR")
-
-                        .requestMatchers("/api/documents/**")
-                        .authenticated()
+                        .requestMatchers("/api/documents/**").authenticated()
 
                         .anyRequest().authenticated()
                 )
@@ -85,5 +85,18 @@ public class SecurityConfig {
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOrigins(List.of("http://localhost:5173"));
+        configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+        configuration.setAllowedHeaders(List.of("*"));
+        configuration.setAllowCredentials(true);
+
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
     }
 }

@@ -1,5 +1,7 @@
 package com.example.demo.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import java.time.LocalDate;
@@ -26,15 +28,18 @@ public class Projet {
 
     @ManyToOne
     @JoinColumn(name = "organisme_id")
+    @JsonIgnore
     private Organisme organisme;
 
     @ManyToOne
     @JoinColumn(name = "chef_projet_id")
+    @JsonIgnore
     private Employe chefDeProjet;
 
     @OneToMany(mappedBy = "projet", cascade = CascadeType.ALL)
-    @JsonManagedReference
+    @JsonIgnore
     private List<Phase> phases = new ArrayList<>();
 
     @OneToMany(mappedBy = "projet", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Document> documents = new ArrayList<>();}

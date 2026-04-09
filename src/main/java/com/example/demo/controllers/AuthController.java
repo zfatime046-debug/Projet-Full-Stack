@@ -25,18 +25,23 @@ public class AuthController {
     }
 
     @GetMapping("/me")
-    public ResponseEntity<AuthMeDTO> me(Authentication authentication) {
+    public ResponseEntity<?> me(Authentication authentication) {
+        if (authentication == null || !authentication.isAuthenticated()) {
+            return ResponseEntity.status(401).body("Non authentifié");
+        }
         return ResponseEntity.ok(authService.me(authentication.getName()));
     }
 
     @PostMapping("/change-password")
-    public ResponseEntity<String> changePassword(Authentication authentication,
-                                                 @Valid @RequestBody ChangePasswordDTO dto) {
+    public ResponseEntity<?> changePassword(Authentication authentication, @Valid @RequestBody ChangePasswordDTO dto) {
+        if (authentication == null || !authentication.isAuthenticated()) {
+            return ResponseEntity.status(401).body("Non authentifié");
+        }
         authService.changePassword(authentication.getName(), dto);
         return ResponseEntity.ok("Mot de passe modifié avec succès");
     }
 
-    // ⚠️ TEMPORAIRE - Supprimer après utilisation
+
     @GetMapping("/hash")
     public String hash(@RequestParam String password) {
         return new BCryptPasswordEncoder().encode(password);
