@@ -16,6 +16,12 @@ AIT-BELLA Fatimaezzohra
 Ce projet constitue le développement d'une API RESTful dédiée à la gestion de projets informatiques. Elle permet de gérer l'ensemble du cycle de vie d'un projet : création, affectation des ressources humaines, suivi des phases, facturation et pilotage via un tableau de bord.
 L'API respecte les principes REST et met en œuvre les opérations CRUD complètes sur les entités métier suivantes : Organismes, Employés, Projets, Phases et Affectations.
 
+Architecture du projet :
+--
+
+<img width="1536" height="1024" alt="image" src="https://github.com/user-attachments/assets/b8b4c5fc-a6f7-433a-bb01-05eb3bd2681b" />
+
+
 🛠️ Technologies Utilisées
 --
 
@@ -30,6 +36,8 @@ MySQL : Base de données relationnelle
 Postman : Tests et validation des endpoints
 
 Maven : Gestion des dépendances
+
+Docker : Conteneurisation
 
 📂 Structure du Projet
 --
