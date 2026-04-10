@@ -1,20 +1,15 @@
 package com.example.demo.controllers;
 
-import com.example.demo.dto.JwtResponse;
-import com.example.demo.dto.LoginRequest;
-import com.example.demo.dto.MessageResponse;
-import com.example.demo.dto.ChangePasswordRequest;
-import com.example.demo.security.JwtUtils;
-import com.example.demo.security.UserDetailsImpl;
-import com.example.demo.services.EmployeService;
+import com.example.demo.dto.auth.AuthMeDTO;
+import com.example.demo.dto.auth.ChangePasswordDTO;
+import com.example.demo.dto.auth.LoginRequestDTO;
+import com.example.demo.dto.auth.LoginResponseDTO;
+import com.example.demo.services.AuthService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -22,55 +17,33 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class AuthController {
 
-    private final AuthenticationManager authenticationManager;
-    private final JwtUtils jwtUtils;
-    private final EmployeService employeService;
-    private final PasswordEncoder passwordEncoder;
+    private final AuthService authService;
 
     @PostMapping("/login")
-    public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(loginRequest.getLogin(), loginRequest.getPassword()));
-
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-        String jwt = jwtUtils.generateJwtToken(authentication);
-
-        UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
-
-        return ResponseEntity.ok(new JwtResponse(
-                jwt,
-                userDetails.getId(),
-                userDetails.getLogin(),
-                userDetails.getNom(),
-                userDetails.getPrenom(),
-                userDetails.getEmail(),
-                userDetails.getAuthorities().iterator().next().getAuthority() // le rôle
-        ));
+    public ResponseEntity<LoginResponseDTO> login(@Valid @RequestBody LoginRequestDTO request) {
+        return ResponseEntity.ok(authService.login(request));
     }
 
     @GetMapping("/me")
-    public ResponseEntity<?> getCurrentUser() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    public ResponseEntity<?> me(Authentication authentication) {
         if (authentication == null || !authentication.isAuthenticated()) {
-            return ResponseEntity.status(401).body(new MessageResponse("Non authentifié"));
+            return ResponseEntity.status(401).body("Non authentifié");
         }
-        UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
-        return ResponseEntity.ok(userDetails);
+        return ResponseEntity.ok(authService.me(authentication.getName()));
     }
 
     @PostMapping("/change-password")
-    public ResponseEntity<?> changePassword(@Valid @RequestBody ChangePasswordRequest request) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
-
-        // Vérifier l'ancien mot de passe
-        if (!passwordEncoder.matches(request.getOldPassword(), userDetails.getPassword())) {
-            return ResponseEntity.badRequest().body(new MessageResponse("Ancien mot de passe incorrect"));
+    public ResponseEntity<?> changePassword(Authentication authentication, @Valid @RequestBody ChangePasswordDTO dto) {
+        if (authentication == null || !authentication.isAuthenticated()) {
+            return ResponseEntity.status(401).body("Non authentifié");
         }
+        authService.changePassword(authentication.getName(), dto);
+        return ResponseEntity.ok("Mot de passe modifié avec succès");
+    }
 
-        // Mettre à jour le nouveau mot de passe
-        employeService.changePassword(userDetails.getId(), request.getNewPassword());
 
-        return ResponseEntity.ok(new MessageResponse("Mot de passe changé avec succès"));
+    @GetMapping("/hash")
+    public String hash(@RequestParam String password) {
+        return new BCryptPasswordEncoder().encode(password);
     }
 }

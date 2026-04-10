@@ -4,7 +4,6 @@ import lombok.Data;
 
 @Data
 public class OrganismeResponseDTO {
-
     private Long id;
     private String code;
     private String nom;
@@ -13,4 +12,5 @@ public class OrganismeResponseDTO {
     private String nomContact;
     private String emailContact;
     private String siteWeb;
+
 }

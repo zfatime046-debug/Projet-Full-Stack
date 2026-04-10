@@ -26,8 +26,7 @@ public class OrganismeController {
 
     @PutMapping("/{id}")
     @PreAuthorize("hasAnyAuthority('ADMIN', 'SECRETAIRE')")
-    public ResponseEntity<OrganismeResponseDTO> modifier(@PathVariable Long id,
-                                                         @Valid @RequestBody OrganismeRequestDTO dto) {
+    public ResponseEntity<OrganismeResponseDTO> modifier(@PathVariable Long id, @Valid @RequestBody OrganismeRequestDTO dto) {
         return ResponseEntity.ok(organismeService.modifier(id, dto));
     }
 
@@ -44,7 +43,7 @@ public class OrganismeController {
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAnyAuthority('ADMIN', 'SECRETAIRE')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<Void> supprimer(@PathVariable Long id) {
         organismeService.supprimer(id);
         return ResponseEntity.noContent().build();

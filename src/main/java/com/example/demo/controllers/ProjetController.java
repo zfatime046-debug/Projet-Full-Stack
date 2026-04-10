@@ -21,13 +21,13 @@ public class ProjetController {
     }
 
     @PostMapping
-    @PreAuthorize("hasAnyAuthority('ADMIN', 'SECRETAIRE', 'DIRECTEUR')")
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'CHEF_PROJET')")
     public Projet createProjet(@RequestBody ProjetRequest request) {
         return projetService.createProjet(request);
     }
 
     @PutMapping("/{id}")
-    @PreAuthorize("hasAnyAuthority('ADMIN', 'SECRETAIRE', 'DIRECTEUR')")
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'CHEF_PROJET')")
     public Projet updateProjet(@PathVariable Long id, @RequestBody ProjetRequest request) {
         return projetService.updateProjet(id, request);
     }
@@ -60,6 +60,7 @@ public class ProjetController {
                 " | Nombre de phases : " + nombrePhases +
                 " | Montant total des phases : " + totalPhases;
     }
+
     @GetMapping
     @PreAuthorize("isAuthenticated()")
     public List<Projet> getAllProjets() {
