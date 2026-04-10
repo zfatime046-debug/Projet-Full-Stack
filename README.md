@@ -207,6 +207,20 @@ Filtrage :
 
 <img width="1187" height="756" alt="tableau de bord" src="https://github.com/user-attachments/assets/5309d66f-df38-4736-9b6f-44c51ccfd21d" />
 
+#Livrable:
+
+<img width="1588" height="832" alt="update un livrable" src="https://github.com/user-attachments/assets/61d338ca-1d65-4b7c-af9c-a6a080af7a51" />
+<img width="1917" height="822" alt="getlivrable par id" src="https://github.com/user-attachments/assets/97216718-cc62-4e04-958b-2e9c407dabe0" />
+<img width="1893" height="943" alt="get tous les livrables" src="https://github.com/user-attachments/assets/78d64fa9-60df-45f4-ba41-9806359a5b61" />
+
+#Document:
+<img width="1145" height="467" alt="postdocument" src="https://github.com/user-attachments/assets/82206854-d84f-4045-a113-0a20c87eff43" />
+<img width="1145" height="467" alt="postdocument" src="https://github.com/user-attachments/assets/5bf79e28-4a14-4501-b15d-909126d511f5" />
+<img width="1668" height="732" alt="getdocumentfile" src="https://github.com/user-attachments/assets/89c2bc73-91f6-4b75-9bba-23001394beb1" />
+<img width="1700" height="697" alt="getdocument3" src="https://github.com/user-attachments/assets/49a6e0cb-5448-4b4c-8385-c01937066261" />
+<img width="1772" height="913" alt="Getdocument2" src="https://github.com/user-attachments/assets/d183acf5-d5fe-45b3-beed-cda39790d38b" />
+<img width="1897" height="917" alt="getdocument" src="https://github.com/user-attachments/assets/21bbe156-0342-4ac0-b37d-2d3bf9026e8c" />
+<img width="1747" height="632" alt="deletedocument" src="https://github.com/user-attachments/assets/f79172b7-d0cf-4e46-af76-18963d3cc92b" />
 
 
 
