@@ -65,6 +65,48 @@ Execution vdeo :
 
 https://github.com/user-attachments/assets/ce97817d-4cc6-4f64-9328-582e0ea8f5a2
 
+🐳 Conteneurisation du projet:
+--
+
+Le projet a été conteneurisé à l’aide de Docker et Docker Compose afin de garantir un environnement d’exécution stable et reproductible.
+
+🔹 Architecture mise en place
+--
+
+L’application repose sur deux conteneurs principaux :
+
+spring-app : contient l’application Spring Boot
+db-service : contient la base de données MySQL
+
+Ces deux services communiquent via un réseau Docker interne.
+
+<img width="1667" height="774" alt="image" src="https://github.com/user-attachments/assets/ff290ed6-9ab3-479d-bc1f-3a941ebca54e" />
+
+<img width="1919" height="822" alt="image" src="https://github.com/user-attachments/assets/ccf52753-54cd-43dc-9a9e-4d9b9c224098" />
+
+
+<img width="1824" height="867" alt="image" src="https://github.com/user-attachments/assets/341d22df-9908-46c5-a0fb-47ddac043b17" />
+
+
+<img width="1571" height="668" alt="image" src="https://github.com/user-attachments/assets/def0b000-9859-4d50-baad-d694becf995e" />
+
+
+<img width="1898" height="1004" alt="img" src="https://github.com/user-attachments/assets/293aa719-e05c-4b47-862b-191b8688b28d" />
+
+🔹 Avantages de cette approche:
+--
+
+✔️ Déploiement rapide en une commande
+
+✔️ Environnement isolé
+
+✔️ Compatible sur toutes les machines
+
+✔️ Pas besoin d’installer MySQL ou Java localement
+
+✔️ Facilite la correction et l’évaluation du projet
+
+
 🔧 Endpoints de l'API
 --
 
@@ -276,47 +318,6 @@ Une phase ne peut être marquée comme payée que si elle est préalablement fac
 
 Les filtres de phases prennent en charge la pagination pour les grands ensembles de données.
 
-Conteunarisation:
---
-
-🐳 Conteneurisation du projet
-
-Le projet a été conteneurisé à l’aide de Docker et Docker Compose afin de garantir un environnement d’exécution stable et reproductible.
-
-🔹 Architecture mise en place
-
-L’application repose sur deux conteneurs principaux :
-
-spring-app : contient l’application Spring Boot
-db-service : contient la base de données MySQL
-
-Ces deux services communiquent via un réseau Docker interne.
-
-<img width="1667" height="774" alt="image" src="https://github.com/user-attachments/assets/ff290ed6-9ab3-479d-bc1f-3a941ebca54e" />
-
-<img width="1919" height="822" alt="image" src="https://github.com/user-attachments/assets/ccf52753-54cd-43dc-9a9e-4d9b9c224098" />
-
-
-<img width="1824" height="867" alt="image" src="https://github.com/user-attachments/assets/341d22df-9908-46c5-a0fb-47ddac043b17" />
-
-
-<img width="1571" height="668" alt="image" src="https://github.com/user-attachments/assets/def0b000-9859-4d50-baad-d694becf995e" />
-
-
-<img width="1898" height="1004" alt="img" src="https://github.com/user-attachments/assets/293aa719-e05c-4b47-862b-191b8688b28d" />
-
-🔹 Avantages de cette approche:
---
-
-✔️ Déploiement rapide en une commande
-
-✔️ Environnement isolé
-
-✔️ Compatible sur toutes les machines
-
-✔️ Pas besoin d’installer MySQL ou Java localement
-
-✔️ Facilite la correction et l’évaluation du projet
 
 
 
