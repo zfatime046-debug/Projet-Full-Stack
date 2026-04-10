@@ -76,6 +76,7 @@ Le projet a été conteneurisé à l’aide de Docker et Docker Compose afin de 
 L’application repose sur deux conteneurs principaux :
 
 spring-app : contient l’application Spring Boot
+
 db-service : contient la base de données MySQL
 
 Ces deux services communiquent via un réseau Docker interne.
