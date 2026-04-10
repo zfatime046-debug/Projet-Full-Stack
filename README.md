@@ -19,7 +19,8 @@ L'API respecte les principes REST et met en œuvre les opérations CRUD complèt
 Architecture du projet :
 --
 
-<img width="1536" height="1024" alt="image" src="https://github.com/user-attachments/assets/083f8958-90c3-4268-813a-ee102c78edc9" />
+<img width="1536" height="1024" alt="image" src="https://github.com/user-attachments/assets/198df67c-4c21-4452-b074-2e2648c1653a" />
+
 
 
 
