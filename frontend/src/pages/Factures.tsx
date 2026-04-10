@@ -33,7 +33,9 @@ const Factures = () => {
 
   const updateStatut = async (id: number, nouveauStatut: string) => {
     try {
-      await api.patch(`/factures/${id}/statut`, { statut: nouveauStatut });
+      await api.put(`/factures/${id}/statut`, {
+  statut: "PAYEE"
+});
       toast.success(`Facture ${nouveauStatut}`);
       fetchData();
     } catch (err) {
