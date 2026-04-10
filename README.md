@@ -1,7 +1,9 @@
 📋 API de Gestion de Projets — Documentation Technique
-Filière : Systèmes d'Information et Réseaux (SIR)
+Filière : Systèmes Informatiques Répartis (SIR)
+--
 
 Réalisé par :
+--
 
 AIT ABDELMALEK Chaimaa
 
@@ -10,12 +12,12 @@ AZIZI Zakia
 AIT-BELLAFatimaezzohra
 
 📌 Description du Projet
+--
 Ce projet constitue le développement d'une API RESTful dédiée à la gestion de projets informatiques. Elle permet de gérer l'ensemble du cycle de vie d'un projet : création, affectation des ressources humaines, suivi des phases, facturation et pilotage via un tableau de bord.
 L'API respecte les principes REST et met en œuvre les opérations CRUD complètes sur les entités métier suivantes : Organismes, Employés, Projets, Phases et Affectations.
 
 🛠️ Technologies Utilisées
-
-TechnologieRôleJava 
+--
 
 Java / Spring Boot : Framework principal de l'API
 
@@ -30,6 +32,7 @@ Postman : Tests et validation des endpoints
 Maven : Gestion des dépendances
 
 📂 Structure du Projet
+--
 
 src/
 
@@ -58,18 +61,21 @@ src/
     └── java/                   # Tests unitaires et d'intégration
 
 Execution vdeo :
+--
 
 https://github.com/user-attachments/assets/ce97817d-4cc6-4f64-9328-582e0ea8f5a2
 
 🔧 Endpoints de l'API
+--
 
-##Organisme 
-----
+Organisme 
+--
+
 #creer un Organisme:
 <img width="1919" height="981" alt="image" src="https://github.com/user-attachments/assets/693a6273-f8de-4db4-9eb2-1b73d3d16e79" />
 #Recuperer un Organisme:
 <img width="1916" height="959" alt="image" src="https://github.com/user-attachments/assets/689f3acb-b54f-4475-b5ca-b34ddbb4db87" />
-#Lister Touus les Organisme:
+#Lister Tous les Organisme:
 <img width="1919" height="1006" alt="image" src="https://github.com/user-attachments/assets/ee08dcaa-2f6d-4eb5-ac05-cf8d2d8b5ee0" />
 #Modifier un Organisme:
 <img width="1469" height="942" alt="image" src="https://github.com/user-attachments/assets/7b2dc557-d28d-4262-900b-209b29a80013" />
@@ -80,13 +86,13 @@ https://github.com/user-attachments/assets/ce97817d-4cc6-4f64-9328-582e0ea8f5a2
 La cause :un organisme lié à des projets ne peut pas être supprimé tant que ses projets existent
 ----
 ---
-#Employe
+Employe
 ---
 #Creer un Employe:
 <img width="1437" height="848" alt="image" src="https://github.com/user-attachments/assets/5bad6fdd-eebe-4b06-b746-ae8b2151b3af" />
 #Recuperer un Employe:
 <img width="1430" height="809" alt="image" src="https://github.com/user-attachments/assets/90880317-e570-411f-9a33-f0e927efb5c9" />
-#Lister Tous les Employe:
+#Lister Tous les Employes:
 <img width="1455" height="883" alt="image" src="https://github.com/user-attachments/assets/b0b42205-847b-4bd3-9203-4b55127360b9" />
 #Supprimer un Employe:
 <img width="1429" height="652" alt="image" src="https://github.com/user-attachments/assets/8f3414b7-89b8-499a-9fa3-c2bbf58aba47" />
@@ -238,7 +244,8 @@ tableau de bord :
 
 <img width="1187" height="756" alt="tableau de bord" src="https://github.com/user-attachments/assets/5309d66f-df38-4736-9b6f-44c51ccfd21d" />
 
-✅ Tests
+✅ Tests:
+--
 
 L'ensemble des fonctionnalités de l'API a été testé et validé. Les 5 tests principaux couvrent les scénarios CRUD complets ainsi que les règles métier spécifiques.
 
@@ -256,7 +263,8 @@ L'ensemble des fonctionnalités de l'API a été testé et validé. Les 5 tests 
 <img width="1914" height="1007" alt="image" src="https://github.com/user-attachments/assets/35603f4d-0469-4e5d-a465-c9e7c9908628" />
 
 
-📐 Règles Métier
+📐 Règles Métier:
+--
 
 Un organisme ne peut pas être supprimé s'il est associé à des projets actifs.
 
@@ -268,7 +276,8 @@ Une phase ne peut être marquée comme payée que si elle est préalablement fac
 
 Les filtres de phases prennent en charge la pagination pour les grands ensembles de données.
 
-#Conteunarisation:
+Conteunarisation:
+--
 
 🐳 Conteneurisation du projet
 
@@ -296,7 +305,8 @@ Ces deux services communiquent via un réseau Docker interne.
 
 <img width="1898" height="1004" alt="img" src="https://github.com/user-attachments/assets/293aa719-e05c-4b47-862b-191b8688b28d" />
 
-🔹 Avantages de cette approche
+🔹 Avantages de cette approche:
+--
 
 ✔️ Déploiement rapide en une commande
 
