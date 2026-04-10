@@ -145,6 +145,20 @@ public class FactureService {
             );
         }
 
+
         return dto;
+    }
+    public FactureDTO updateStatut(Long id, FactureDTO dto) {
+
+        Facture facture = factureRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Facture introuvable"));
+
+        if (dto.getStatut() == null || dto.getStatut().isBlank()) {
+            throw new RuntimeException("Statut obligatoire");
+        }
+
+        facture.setStatut(StatutFacture.valueOf(dto.getStatut()));
+
+        return toDTO(factureRepository.save(facture));
     }
 }

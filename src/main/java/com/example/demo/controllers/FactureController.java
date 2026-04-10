@@ -10,13 +10,13 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/api")
 @RequiredArgsConstructor
 public class FactureController {
 
     private final FactureService factureService;
 
-    // POST /api/phases/{phaseId}/facture
-    @PostMapping("/api/phases/{phaseId}/facture")
+    @PostMapping("/phases/{phaseId}/facture")
     @PreAuthorize("hasAnyAuthority('ADMIN', 'COMPTABLE')")
     public ResponseEntity<FactureDTO> createFacture(
             @PathVariable Long phaseId,
@@ -24,22 +24,19 @@ public class FactureController {
         return ResponseEntity.ok(factureService.createFacture(phaseId, dto));
     }
 
-    // GET /api/factures
-    @GetMapping("/api/factures")
+    @GetMapping("/factures")
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<List<FactureDTO>> getAllFactures() {
         return ResponseEntity.ok(factureService.getAllFactures());
     }
 
-    // GET /api/factures/{id}
-    @GetMapping("/api/factures/{id}")
+    @GetMapping("/factures/{id}")
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<FactureDTO> getFactureById(@PathVariable Long id) {
         return ResponseEntity.ok(factureService.getFactureById(id));
     }
 
-    // PUT /api/factures/{id}
-    @PutMapping("/api/factures/{id}")
+    @PutMapping("/factures/{id}")
     @PreAuthorize("hasAnyAuthority('ADMIN', 'COMPTABLE')")
     public ResponseEntity<FactureDTO> updateFacture(
             @PathVariable Long id,
@@ -47,11 +44,20 @@ public class FactureController {
         return ResponseEntity.ok(factureService.updateFacture(id, dto));
     }
 
-    // DELETE /api/factures/{id}
-    @DeleteMapping("/api/factures/{id}")
+    @DeleteMapping("/factures/{id}")
     @PreAuthorize("hasAnyAuthority('ADMIN', 'COMPTABLE')")
     public ResponseEntity<Void> deleteFacture(@PathVariable Long id) {
         factureService.deleteFacture(id);
         return ResponseEntity.noContent().build();
+    }
+
+    // 🔥 FIX IMPORTANT STATUT
+    @PutMapping("/factures/{id}/statut")
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'COMPTABLE')")
+    public ResponseEntity<FactureDTO> updateStatut(
+            @PathVariable Long id,
+            @RequestBody FactureDTO dto
+    ) {
+        return ResponseEntity.ok(factureService.updateStatut(id, dto));
     }
 }

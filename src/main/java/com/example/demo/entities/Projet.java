@@ -23,6 +23,7 @@ public class Projet {
     private String nom;
     private String description;
     private LocalDate dateDebut;
+    @Column(nullable = true)
     private LocalDate dateFin;
     private double montant;
 

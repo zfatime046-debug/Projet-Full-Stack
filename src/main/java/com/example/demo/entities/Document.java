@@ -1,5 +1,6 @@
 package com.example.demo.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -18,6 +19,7 @@ public class Document {
     private String chemin;
 
     @ManyToOne
+    @JsonBackReference
     @JoinColumn(name = "projet_id")
     private Projet projet;
 
