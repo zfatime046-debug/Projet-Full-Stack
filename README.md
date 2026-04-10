@@ -214,8 +214,7 @@ Filtrage :
 <img width="1893" height="943" alt="get tous les livrables" src="https://github.com/user-attachments/assets/78d64fa9-60df-45f4-ba41-9806359a5b61" />
 
 #Document:
-<img width="1145" height="467" alt="postdocument" src="https://github.com/user-attachments/assets/82206854-d84f-4045-a113-0a20c87eff43" />
-<img width="1145" height="467" alt="postdocument" src="https://github.com/user-attachments/assets/5bf79e28-4a14-4501-b15d-909126d511f5" />
+
 <img width="1668" height="732" alt="getdocumentfile" src="https://github.com/user-attachments/assets/89c2bc73-91f6-4b75-9bba-23001394beb1" />
 <img width="1700" height="697" alt="getdocument3" src="https://github.com/user-attachments/assets/49a6e0cb-5448-4b4c-8385-c01937066261" />
 <img width="1772" height="913" alt="Getdocument2" src="https://github.com/user-attachments/assets/d183acf5-d5fe-45b3-beed-cda39790d38b" />
