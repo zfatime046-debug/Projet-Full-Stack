@@ -8,6 +8,23 @@ https://github.com/user-attachments/assets/ce97817d-4cc6-4f64-9328-582e0ea8f5a2
 
 
 
+#Conteunarisation:
+---
+<img width="1667" height="774" alt="image" src="https://github.com/user-attachments/assets/ff290ed6-9ab3-479d-bc1f-3a941ebca54e" />
+
+<img width="1919" height="822" alt="image" src="https://github.com/user-attachments/assets/ccf52753-54cd-43dc-9a9e-4d9b9c224098" />
+
+
+<img width="1824" height="867" alt="image" src="https://github.com/user-attachments/assets/341d22df-9908-46c5-a0fb-47ddac043b17" />
+
+
+<img width="1571" height="668" alt="image" src="https://github.com/user-attachments/assets/def0b000-9859-4d50-baad-d694becf995e" />
+
+
+<img width="1898" height="1004" alt="img" src="https://github.com/user-attachments/assets/293aa719-e05c-4b47-862b-191b8688b28d" />
+
+
+
 
 --
 Execution des 5 Test:
@@ -189,23 +206,6 @@ Filtrage :
 #tableau de bord :
 
 <img width="1187" height="756" alt="tableau de bord" src="https://github.com/user-attachments/assets/5309d66f-df38-4736-9b6f-44c51ccfd21d" />
-
-#Conteunarisation:
----
-<img width="1667" height="774" alt="image" src="https://github.com/user-attachments/assets/ff290ed6-9ab3-479d-bc1f-3a941ebca54e" />
-
-<img width="1919" height="822" alt="image" src="https://github.com/user-attachments/assets/ccf52753-54cd-43dc-9a9e-4d9b9c224098" />
-
-
-<img width="1824" height="867" alt="image" src="https://github.com/user-attachments/assets/341d22df-9908-46c5-a0fb-47ddac043b17" />
-
-
-<img width="1571" height="668" alt="image" src="https://github.com/user-attachments/assets/def0b000-9859-4d50-baad-d694becf995e" />
-
-
-<img width="1898" height="1004" alt="img" src="https://github.com/user-attachments/assets/293aa719-e05c-4b47-862b-191b8688b28d" />
-
-
 
 
 
